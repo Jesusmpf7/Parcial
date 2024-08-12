@@ -1,0 +1,44 @@
+- hosts: servers
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install cowsay
+      apt:
+        name: cowsay
+        state: present
+
+    - name: Create a file
+      file:
+        path: /tmp/hello.txt
+        state: touch
+
+    - name: Copy a file
+      copy:
+        src: /path/to/local/file
+        dest: /tmp/remote-file.txt
+
+    - name: Create a directory
+      file:
+        path: /tmp/newdir
+        state: directory
+
+    - name: Start Apache service
+      service:
+        name: apache2
+        state: started
+
+    - name: Add a user
+      user:
+        name: newuser
+        state: present
+
+    - name: Run a script
+      command: /path/to/script.sh
